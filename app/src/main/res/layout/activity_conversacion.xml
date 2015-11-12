@@ -1,0 +1,77 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+android:orientation="vertical"
+android:layout_height="match_parent"
+    tools:context="ar.uba.fi.taller2.mensajerocliente.Activities.ConversacionActivity"   >
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="abrirPerfil"
+        android:padding="5dp">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/imagePerfil"
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Cargando..."
+            android:id="@+id/textNick"
+            android:layout_toRightOf="@+id/imagePerfil"
+            android:paddingLeft="5dp"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/textUltimaConexion"
+            android:layout_toRightOf="@+id/imagePerfil"
+            android:layout_below="@+id/textNick"
+            android:layout_alignParentRight="false"
+            android:paddingLeft="5dp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="100"
+        android:id="@+id/scrollMensajes"
+        android:background="@drawable/back">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/linearConversacion"></LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editMensaje"
+            android:layout_weight="10" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/boton_enviar"
+            android:id="@+id/buttonEnviar"
+            android:onClick="enviarMensaje" />
+    </LinearLayout>
+
+</LinearLayout>

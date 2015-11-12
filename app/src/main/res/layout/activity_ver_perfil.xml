@@ -1,0 +1,71 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="ar.uba.fi.taller2.mensajerocliente.Activities.VerPerfilActivity">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/imagePerfil"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="nick (usuario)"
+        android:id="@+id/textNickUsuario"
+        android:layout_toRightOf="@+id/imagePerfil"
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="conexion"
+        android:id="@+id/textConexion"
+        android:layout_toRightOf="@+id/imagePerfil"
+        android:layout_below="@+id/textNickUsuario"
+        android:layout_marginLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="ultimaconexion"
+        android:id="@+id/textUltimaConexion"
+        android:layout_toRightOf="@+id/imagePerfil"
+        android:layout_below="@+id/textConexion"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="false"
+        android:textStyle="italic"
+        android:layout_marginLeft="5dp" />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:id="@+id/fragmentMapa"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textUbicacion" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="ubicación"
+        android:id="@+id/textUbicacion"
+        android:layout_below="@+id/textUltimaConexion"
+        android:layout_toRightOf="@+id/imagePerfil"
+        android:layout_toEndOf="@+id/imagePerfil"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="true"
+        android:gravity="right" />
+
+</RelativeLayout>

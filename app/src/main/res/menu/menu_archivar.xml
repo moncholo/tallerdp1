@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ar.uba.fi.taller2.mensajerocliente.Activities.ListaDeConversacionesActivity">
+    <item android:id="@+id/action_archivar" android:title="@string/archivar_conversacion"
+        android:orderInCategory="100" app:showAsAction="ifRoom"/>
+</menu>

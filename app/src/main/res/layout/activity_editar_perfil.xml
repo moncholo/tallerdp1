@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="ar.uba.fi.taller2.mensajerocliente.Activities.EditarPerfilActivity">
+
+    <ImageButton
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/imagePerfil"
+        android:src="@mipmap/ic_launcher"
+        android:layout_alignParentLeft="false"
+        android:scaleType="centerCrop"
+        android:onClick="cambiarImagen" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editNick"
+        android:hint="@string/nick"
+        android:layout_toRightOf="@+id/imagePerfil" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editConexion"
+        android:hint="@string/conexion"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/editNick"
+        android:layout_toRightOf="@+id/imagePerfil" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editPasswordVieja"
+        android:hint="@string/password_vieja"
+        android:layout_below="@+id/editConexion"
+        android:layout_toRightOf="@+id/imagePerfil" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/editPasswordNueva"
+        android:hint="@string/password_nueva"
+        android:layout_below="@+id/editPasswordVieja"
+        android:layout_toRightOf="@+id/imagePerfil" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/guardar"
+        android:id="@+id/button"
+        android:layout_below="@+id/editPasswordNueva"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="true"
+        android:onClick="guardarPerfil" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/actualizar_ubicacion"
+        android:id="@+id/buttonActualizarUbicacion"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/editPasswordNueva"
+        android:layout_toLeftOf="@+id/button"
+        android:onClick="actualizarUbicacion" />
+</RelativeLayout>

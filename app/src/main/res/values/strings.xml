@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Mensajero</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="inciar_sesion_titulo">Iniciar Sesión</string>
+    <string name="iniciar_sesion_boton">Iniciar Sesión</string>
+    <string name="password_etiqueta">Contraseña</string>
+    <string name="usuario_etiqueta">Usuario</string>
+    <string name="ingrese_etiqueta">Ingrese su usuario y su contraseña</string>
+    <string name="title_activity_lista_de_conversaciones">Conversaciones</string>
+    <string name="title_activity_lista_de_conversaciones_archivadas">Conversaciones Archivadas</string>
+    <string name="title_activity_broadcast">Difusión</string>
+
+    <string name="editar_mi_perfil">Editar Perfil</string>
+    <string name="nueva_conversacion">Nueva Conversación</string>
+    <string name="boton_registrarse">Registrarse</string>
+    <string name="archivadas">Conversaciones Archivadas</string>
+    <string name="title_activity_conversacion">Conversación</string>
+    <string name="boton_enviar">Enviar</string>
+    <string name="title_activity_ver_perfil">Ver Perfil</string>
+    <string name="title_activity_editar_perfil">Editar Perfil</string>
+    <string name="nick">Nick</string>
+    <string name="conexion">Conexion</string>
+    <string name="password">Contraseña</string>
+    <string name="repetir_contraseña">Repetir contraseña</string>
+    <string name="guardar">Guardar</string>
+    <string name="title_activity_registro">Registro</string>
+    <string name="conversaciones_archivadas">Conversaciones Archivadas</string>
+    <string name="error_conexion">Error de conexión</string>
+    <string name="contrasenas_no_concuerdan">Las contraseñas no concuerdan</string>
+    <string name="registracion_valida">Registro válido, ya puede iniciar sesión</string>
+    <string name="cargando">Cargando...</string>
+    <string name="enviando">Enviando...</string>
+    <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="password_vieja">Contraseña vieja</string>
+    <string name="password_nueva">Contraseña nueva</string>
+    <string name="perfil_actualizado">Perfil actualizado correctamente</string>
+    <string name="elegir_imagen">Elegir imagen</string>
+    <string name="btn_buscar">Buscar</string>
+    <string name="actualizar_ubicacion">Actualizar Ubicación</string>
+    <string name="archivar_conversacion">Archivar</string>
+    <string name="desarchivar_conversacion">Desarchivar</string>
+    <string name="conversacion_archivada">Conversación archivada</string>
+    <string name="conversacion_desarchivada">Conversación desarchivada</string>
+    <string name="activar_ubicacion">Active su ubicación e intente nuevamente</string>
+    <string name="buscar_conversacion">Buscar conversación</string>
+    <string name="nuevos_mensajes">Nuevos mensajes</string>
+    <string name="mensaje_broadcast">Difusión</string>
+</resources>
