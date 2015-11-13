@@ -3,6 +3,7 @@ package ar.uba.fi.taller2.mensajerocliente;
 import junit.framework.TestCase;
 
 import ar.uba.fi.taller2.mensajerocliente.Excepciones.ImposibleCrearConversacionException;
+import ar.uba.fi.taller2.mensajerocliente.Excepciones.ImposibleLeerObjetoJsonException;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.Conversacion;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.ManejadorConversacion;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.Mensaje;
@@ -36,6 +37,8 @@ public class JsonTest extends TestCase {
             unaConversacion = manejador.crearConversacion();
         } catch (ImposibleCrearConversacionException e) {
             assertEquals(0,1);
+        } catch (ImposibleLeerObjetoJsonException e) {
+            e.printStackTrace();
         }
 
         Mensaje unMensaje = unaConversacion.getMensajes().get(0);
@@ -60,6 +63,8 @@ public class JsonTest extends TestCase {
             unaConversacion = manejador.crearConversacion();
         } catch (ImposibleCrearConversacionException e) {
             assertEquals(0,1);
+        } catch (ImposibleLeerObjetoJsonException e) {
+            e.printStackTrace();
         }
 
 
@@ -83,6 +88,8 @@ public class JsonTest extends TestCase {
             unaConversacion = manejador.crearConversacion();
         } catch (ImposibleCrearConversacionException e) {
             assertEquals(0,1);
+        } catch (ImposibleLeerObjetoJsonException e) {
+            e.printStackTrace();
         }
 
 

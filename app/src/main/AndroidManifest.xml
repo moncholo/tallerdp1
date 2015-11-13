@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDh0t2dtBegsie_m8lddnrowhcrBYdPtQ4"/>
+            android:value="AIzaSyDh0t2dtBegsie_m8lddnrowhcrBYdPtQ4" />
+
         <activity
             android:name=".Activities.IniciarSesionActivity"
             android:label="@string/app_name" >
@@ -26,8 +27,8 @@
         </activity>
         <activity
             android:name=".Activities.ListaDeConversacionesActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:label="@string/title_activity_lista_de_conversaciones" >
+            android:label="@string/title_activity_lista_de_conversaciones"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".Activities.BroadcastActivity"
@@ -58,7 +59,13 @@
             android:name=".Activities.IniciarNuevaConversacionActivity"
             android:label="@string/nueva_conversacion" >
         </activity>
-        <service android:name=".utilidades.ServicioDeNotificaciones" android:exported="false"/>
+
+        <service
+            android:name=".utilidades.ServicioDeNotificaciones"
+            android:exported="false" />
+
+        <activity android:name=".Activities.RegistrarViajeActivity" >
+        </activity>
     </application>
 
 </manifest>
