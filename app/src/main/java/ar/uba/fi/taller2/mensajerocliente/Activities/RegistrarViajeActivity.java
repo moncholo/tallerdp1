@@ -52,6 +52,8 @@ public class RegistrarViajeActivity extends ActionBarActivity {
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                 InputMethodManager.HIDE_NOT_ALWAYS);
 
+        final long date = calendarioIda.getDate();
+
         calendarioIda.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
             @Override
@@ -59,10 +61,11 @@ public class RegistrarViajeActivity extends ActionBarActivity {
                                             int year, int month, int dayOfMonth) {
 
 
-                int monthOk = month + 1;
-                bLlegada.setText("Ida: \n" + dayOfMonth + "/" + monthOk + "/" + year);
-                calendarioIda.setVisibility(View.INVISIBLE);
-
+                if (view.getDate() != date) {
+                    int monthOk = month + 1;
+                    bLlegada.setText("Ida: \n" + dayOfMonth + "/" + monthOk + "/" + year);
+                    calendarioIda.setVisibility(View.INVISIBLE);
+                }
 
             }
         });
@@ -80,16 +83,21 @@ public class RegistrarViajeActivity extends ActionBarActivity {
 
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                 InputMethodManager.HIDE_NOT_ALWAYS);
+
+        final long date = calendarioVuelta.getDate();
+
         calendarioVuelta.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
             @Override
             public void onSelectedDayChange(CalendarView view,
                                             int year, int month, int dayOfMonth) {
 
-                int monthOk = month + 1;
-                bSalida.setText("Vuelta: " + dayOfMonth + "/" + monthOk + "/" + year);
-                calendarioVuelta.setVisibility(View.INVISIBLE);
 
+                if (view.getDate() != date) {
+                    int monthOk = month + 1;
+                    bSalida.setText("Vuelta: " + dayOfMonth + "/" + monthOk + "/" + year);
+                    calendarioVuelta.setVisibility(View.INVISIBLE);
+                }
             }
         });
 
