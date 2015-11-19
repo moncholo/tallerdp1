@@ -47,13 +47,10 @@
     <string name="buscar_conversacion">Buscar conversación</string>
     <string name="nuevos_mensajes">Nuevos mensajes</string>
     <string name="mensaje_broadcast">Difusión</string>
+    <string name="gustos_name">Lista de Actividades</string>
     <string-array name="countries">
         <item >Nueva York, Estados Unidos</item>
         <item >Miami, Estados Unidos</item>
         <item >Paris, Francia</item>
-        <item >Madrid, España</item>
-        <item >Barcelona, España</item>
-        <item >Ibiza, España</item>
-        <item >Londres, Inglaterra</item>
     </string-array>
 </resources>

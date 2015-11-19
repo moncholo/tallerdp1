@@ -2,6 +2,7 @@ package ar.uba.fi.taller2.mensajerocliente.Activities;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -20,7 +21,8 @@ public class RegistrarViajeActivity extends ActionBarActivity {
     private AutoCompleteTextView autoCompleteTextView;
     private ArrayAdapter<String> adapter;
     private CalendarView calendarioIda, calendarioVuelta;
-    public Button bLlegada, bSalida;
+    public Button bLlegada, bSalida, bFinalizar;
+    public final static String CITY = "Ciudad";
 
 
     @Override
@@ -38,6 +40,7 @@ public class RegistrarViajeActivity extends ActionBarActivity {
 
         this.bLlegada = (Button) findViewById(R.id.button_llegada);
         this.bSalida =  (Button) findViewById(R.id.button_salida);
+        this.bFinalizar = (Button) findViewById(R.id.finalizar);
 
     }
 
@@ -103,5 +106,28 @@ public class RegistrarViajeActivity extends ActionBarActivity {
 
 
 
+    }
+
+    public void finalizar (View view){
+
+        String ciudad = autoCompleteTextView.getText().toString();
+        Intent intent = new Intent(this, PreferenciasViajeActivity.class);
+
+        switch (ciudad){
+            case "Paris, Francia":
+                intent.putExtra(CITY, ciudad);
+                break;
+            case "Nueva York, Estados Unidos":
+                intent.putExtra(CITY, ciudad);
+                break;
+            case "Miami, Estados Unidos":
+                intent.putExtra(CITY, ciudad);
+                break;
+            default:
+                intent.putExtra(CITY, "Not Found");
+                break;
+        }
+
+        startActivity(intent);
     }
 }

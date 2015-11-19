@@ -66,6 +66,10 @@
 
         <activity android:name=".Activities.RegistrarViajeActivity" >
         </activity>
+        <activity android:name=".Activities.PreferenciasViajeActivity"
+            android:label="@string/gustos_name"
+            android:parentActivityName=".Activities.RegistrarViajeActivity">
+        </activity>
     </application>
 
 </manifest>
