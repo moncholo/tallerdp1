@@ -1,5 +1,12 @@
 package ar.uba.fi.taller2.mensajerocliente.Activities;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.PopupWindow;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -63,17 +70,17 @@ public class ConversacionActivity extends ActionBarActivity {
         this.timer = new Timer();
 
         this.timer.scheduleAtFixedRate(
-            new TimerTask() {
-                public void run() {
-                    if (eventoRecibido){
-                        eventoRecibido = false;
-                        obtenerUltimosMensajes();
-                    }
+                new TimerTask() {
+                    public void run() {
+                        if (eventoRecibido) {
+                            eventoRecibido = false;
+                            obtenerUltimosMensajes();
+                        }
 
-                }
-            },
-            0,      // run first occurrence immediately
-            tiempoEnMS);  // run every three seconds
+                    }
+                },
+                0,      // run first occurrence immediately
+                tiempoEnMS);  // run every three seconds
     }
 
 
@@ -157,27 +164,39 @@ public class ConversacionActivity extends ActionBarActivity {
     private void crearConversacion2(Conversacion conversacion){
 
 
+        boolean verificarPopUps = false;
+
+        if (ultimaFecha>0){
+            verificarPopUps = true;
+        }
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (conversacion.getMensajes().size()>0) {
             for (int i = conversacion.getMensajes().size() - 1; i >= 0; i--) {
-                View v;
 
-                Log.i("Mensaje ok", String.valueOf(conversacion.getMensajes().size()));
-                if (conversacion.getMensajes().get(i).getUsuario().compareTo(this.usuarioDestino) == 0) {
-                    v = inflater.inflate(R.layout.mensaje_conversacion_destino, l, false);
-                } else {
-                    v = inflater.inflate(R.layout.mensaje_conversacion, l, false);
+                if (conversacion.getMensajes().get(i).getMensaje().compareTo("")!=0) {
+                    View v;
+
+                    Log.i("Mensaje ok", String.valueOf(conversacion.getMensajes().size()));
+                    if (conversacion.getMensajes().get(i).getUsuario().compareTo(this.usuarioDestino) == 0) {
+                        v = inflater.inflate(R.layout.mensaje_conversacion_destino, l, false);
+                    } else {
+                        v = inflater.inflate(R.layout.mensaje_conversacion, l, false);
+                    }
+
+                    TextView mensaje = (TextView) v.findViewById(R.id.textMensaje);
+                    TextView fecha = (TextView) v.findViewById(R.id.textFecha);
+                    TextView textUsuario = (TextView) v.findViewById(R.id.textNombre);
+
+                    textUsuario.setText(conversacion.getMensajes().get(i).getUsuario());
+                    fecha.setText(conversacion.getMensajes().get(i).getFecha());
+                    mensaje.setText(conversacion.getMensajes().get(i).getMensaje().trim());
+                    this.ultimaFecha = conversacion.getMensajes().get(i).getFechaFormatoEntero();
+                    if (verificarPopUps){
+                        verificarPopUpMensaje(conversacion.getMensajes().get(i).getMensaje().trim());
+                    }
+                    l.addView(v);
                 }
-
-                TextView mensaje = (TextView) v.findViewById(R.id.textMensaje);
-                TextView fecha = (TextView) v.findViewById(R.id.textFecha);
-
-                fecha.setText(conversacion.getMensajes().get(i).getFecha());
-                mensaje.setText(conversacion.getMensajes().get(i).getMensaje());
-                this.ultimaFecha = conversacion.getMensajes().get(i).getFechaFormatoEntero();
-
-                l.addView(v);
             }
 
             final ScrollView scroll = (ScrollView) findViewById(R.id.scrollMensajes);
@@ -190,6 +209,39 @@ public class ConversacionActivity extends ActionBarActivity {
         }
     }
 
+    private void verificarPopUpMensaje(String mensaje){
+
+        String stringLink = "";
+        if (mensaje.contains("telo") || mensaje.contains("hacer el amor")){
+            stringLink = getString(R.string.linkTelo);
+        }else if (mensaje.contains("cine")){
+            stringLink = getString(R.string.linkCine);
+        }
+
+        if (stringLink != ""){
+            LayoutInflater layoutInflater
+                    = (LayoutInflater)getBaseContext()
+                    .getSystemService(LAYOUT_INFLATER_SERVICE);
+            View popupView = layoutInflater.inflate(R.layout.popup, null);
+            final PopupWindow popupWindow = new PopupWindow(
+                    popupView,
+                    LayoutParams.WRAP_CONTENT,
+                    LayoutParams.WRAP_CONTENT);
+            Button btnDismiss = (Button)popupView.findViewById(R.id.dismiss);
+            btnDismiss.setOnClickListener(new Button.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    popupWindow.dismiss();
+                }});
+            popupWindow.showAsDropDown(findViewById(R.id.headerConversacion));
+
+            TextView link = (TextView) popupView.findViewById(R.id.textLink);
+            link.setText(stringLink);
+        }
+
+
+    }
 
     private void crearConversacion(Conversacion conversacion){
 
@@ -209,9 +261,8 @@ public class ConversacionActivity extends ActionBarActivity {
             TextView fecha = (TextView)v.findViewById(R.id.textFecha);
 
             fecha.setText(conversacion.getMensajes().get(i).getFecha());
-            mensaje.setText(conversacion.getMensajes().get(i).getMensaje());
+            mensaje.setText(conversacion.getMensajes().get(i).getMensaje().trim());
             this.ultimaFecha = conversacion.getMensajes().get(i).getFechaFormatoEntero();
-
             l.addView(v);
         }
         if (conversacion.getMensajes().size()!=0) {
@@ -311,6 +362,7 @@ public class ConversacionActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
     public void enviarMensaje(View v) {
         TextView mensaje = (TextView)findViewById(R.id.editMensaje);

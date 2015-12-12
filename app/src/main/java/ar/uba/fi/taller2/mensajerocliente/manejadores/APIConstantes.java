@@ -6,14 +6,17 @@ package ar.uba.fi.taller2.mensajerocliente.manejadores;
 public class APIConstantes {
 
     // Parámetros del servidor
-    static final String IP = "msgr.us.to";
+    static final String IP = "104.131.7.26";
     static final String PUERTO= "8080";
 
     //Persistencia de datos
     public static final String PERSISTENCIA_DATOS = "Datos";
     public static final String PERSISTENCIA_TOKEN = "token";
     public static final String PERSISTENCIA_USUARIO = "usuario";
+    public static final String PERSISTENCIA_VIAJES = "viajes";
     public static final String PERSISTENCIA_CONVERSACIONES = "conversaciones";
+    public static final String PERSISTENCIA_EDAD = "edad";
+    public static final String PERSISTENCIA_GRATUITA="version" ;
 
     //Estado de servicios
     public static final String ESTADO_VALIDO = "Servicio Finalizado Correctamente";
@@ -36,6 +39,7 @@ public class APIConstantes {
     public static final String CONVERSACION_ACTIVA = "1";
     public static final String CONVERSACION_ARCHIVADA = "0";
     public static final String CLAVE_FECHA = "fecha";
+    public static final String CLAVE_FILTROS = "filtros";
     public static final String CLAVE_MENSAJE = "mensaje";
     public static final String TOKEN_INVALIDO = "Token invalido";
     public static final String CLAVE_CONEXION = "conexion";
@@ -44,8 +48,9 @@ public class APIConstantes {
     public static final String CLAVE_LATITUD = "latitud";
     public static final String CLAVE_LONGITUD = "longitud";
     public static final String CLAVE_UBICACION_CERCANA = "ubicacionCercana";
-
+    public static final String CLAVE_LISTA_USUARIOS = "listaUsuarios";
     // URL Servicios
+    public static final String LISTA_USUARIOS = "/api/listaUsuarios";
     public static final String REGISTRACION = "/api/registracion";
     public static final String SESION_INICIAR = "/api/sesion/iniciar";
     public static final String SESION_CERRAR = "/api/sesion/cerrar";
@@ -61,13 +66,17 @@ public class APIConstantes {
     public static final String IMAGEN_SUBIR = "/api/imagen/subir";
     public static final String CONVERSACION_OBTENER_NO_LEIDOS = "/api/conversacion/obtenerNoLeidos";
     public static final String UBICACION_ACTUALIZAR = "/api/ubicacion/actualizar";
+    public static final String FILTROS_ACTUALIZAR= "/api/filtros/actualizar";
     public static final String NOTIFICACION_NO_LEIDOS = "/api/notificacion/obtenerNoLeidos";
     public static final String MENSAJE_BROADCAST = "/api/mensaje/broadcast";
+    public static final String BUSCAR_COINCIDENCIAS = "/api/coincidencias/buscar";
 
     // Campos utilizados
     public static final String CAMPO_USUARIO = "usuario";
+    public static final String CAMPO_EDAD = "edad";
     public static final String CAMPO_PASSWORD = "pass";
-
+    public static final String FECHA_IDA = "fechaIda";
+    public static final String FECHA_VUELTA = "fechaVuelta";
     public static final String CAMPO_TOKEN = "token";
     public static final String CAMPO_USUARIO_DESTINO = "usuarioDestino";
     public static final String CAMPO_MENSAJE = "mensaje";
@@ -79,6 +88,7 @@ public class APIConstantes {
     public static final String CAMPO_LATITUD = "latitud";
     public static final String CAMPO_LONGITUD = "longitud";
     public static final String CAMPO_FECHA = "fecha";
+    public static final String CAMPO_FILTROS = "filtros";
 
     //Colores
     public static final int COLOR_NUEVO_MENSAJE = 0xFFA1A1A1;

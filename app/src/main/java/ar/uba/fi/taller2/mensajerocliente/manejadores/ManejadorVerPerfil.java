@@ -32,6 +32,7 @@ public class ManejadorVerPerfil {
                 JSONObject contenido = objeto.getJSONObject(APIConstantes.CONTENIDO);
                 this.perfil = new Perfil();
                 this.perfil.setConexion(contenido.getString(APIConstantes.CLAVE_CONEXION));
+                this.perfil.setFiltros(contenido.getString(APIConstantes.CLAVE_FILTROS));
                 this.perfil.setNick(contenido.getString(APIConstantes.CLAVE_NICK));
                 this.perfil.setUltimaConexion(contenido.getLong(APIConstantes.CLAVE_ULTIMA_CONEXION));
                 this.perfil.setLatitud(contenido.getDouble(APIConstantes.CLAVE_LATITUD));

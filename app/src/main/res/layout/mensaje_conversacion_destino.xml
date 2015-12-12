@@ -11,9 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textMensaje"
+        android:id="@+id/textNombre"
         android:singleLine="false"
-        android:text="Hola que tal" />
+        android:text="Hola que tal"
+        android:textStyle="bold|italic"
+        android:textColor="#ff5e00" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Mensaje"
+        android:id="@+id/textMensaje"
+        android:layout_gravity="right"
+        android:layout_below="@+id/textNombre"
+        android:layout_alignParentLeft="true"
+        android:textStyle="italic" />
 
     <TextView
         android:layout_width="wrap_content"

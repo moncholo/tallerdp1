@@ -1,5 +1,4 @@
 package ar.uba.fi.taller2.mensajerocliente.utilidades;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,40 +6,31 @@ import android.util.AttributeSet;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
 /**
  * Created by matias on 19/11/15.
  */
 public class MultiSelectionSpinner extends Spinner implements
         DialogInterface.OnMultiChoiceClickListener {
-
     String[] _items = null;
     boolean[] mSelection = null;
     boolean[] mSelectionAtStart = null;
     String _itemsAtStart = null;
-
     ArrayAdapter<String> simple_adapter;
-
     public MultiSelectionSpinner(Context context) {
         super(context);
-
         simple_adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item);
         super.setAdapter(simple_adapter);
     }
-
     public MultiSelectionSpinner(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         simple_adapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_spinner_item);
         super.setAdapter(simple_adapter);
     }
-
     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
         if (mSelection != null && which < mSelection.length) {
             mSelection[which] = isChecked;
@@ -51,7 +41,6 @@ public class MultiSelectionSpinner extends Spinner implements
                     "Argument 'which' is out of bounds.");
         }
     }
-
     @Override
     public boolean performClick() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -74,13 +63,11 @@ public class MultiSelectionSpinner extends Spinner implements
         builder.show();
         return true;
     }
-
     @Override
     public void setAdapter(SpinnerAdapter adapter) {
         throw new RuntimeException(
                 "setAdapter is not supported by MultiSelectSpinner.");
     }
-
     public void setItems(String[] items) {
         _items = items;
         mSelection = new boolean[_items.length];
@@ -91,17 +78,15 @@ public class MultiSelectionSpinner extends Spinner implements
         mSelection[0] = true;
         mSelectionAtStart[0] = true;
     }
-
     public void setItems(List<String> items) {
         _items = items.toArray(new String[items.size()]);
         mSelection = new boolean[_items.length];
-        mSelectionAtStart  = new boolean[_items.length];
+        mSelectionAtStart = new boolean[_items.length];
         simple_adapter.clear();
         simple_adapter.add(_items[0]);
         Arrays.fill(mSelection, false);
         mSelection[0] = true;
     }
-
     public void setSelection(String[] selection) {
         for (String cell : selection) {
             for (int j = 0; j < _items.length; ++j) {
@@ -112,7 +97,6 @@ public class MultiSelectionSpinner extends Spinner implements
             }
         }
     }
-
     public void setSelection(List<String> selection) {
         for (int i = 0; i < mSelection.length; i++) {
             mSelection[i] = false;
@@ -129,7 +113,6 @@ public class MultiSelectionSpinner extends Spinner implements
         simple_adapter.clear();
         simple_adapter.add(buildSelectedItemString());
     }
-
     public void setSelection(int index) {
         for (int i = 0; i < mSelection.length; i++) {
             mSelection[i] = false;
@@ -145,7 +128,6 @@ public class MultiSelectionSpinner extends Spinner implements
         simple_adapter.clear();
         simple_adapter.add(buildSelectedItemString());
     }
-
     public void setSelection(int[] selectedIndices) {
         for (int i = 0; i < mSelection.length; i++) {
             mSelection[i] = false;
@@ -163,7 +145,6 @@ public class MultiSelectionSpinner extends Spinner implements
         simple_adapter.clear();
         simple_adapter.add(buildSelectedItemString());
     }
-
     public List<String> getSelectedStrings() {
         List<String> selection = new LinkedList<>();
         for (int i = 0; i < _items.length; ++i) {
@@ -173,7 +154,6 @@ public class MultiSelectionSpinner extends Spinner implements
         }
         return selection;
     }
-
     public List<Integer> getSelectedIndices() {
         List<Integer> selection = new LinkedList<>();
         for (int i = 0; i < _items.length; ++i) {
@@ -183,28 +163,23 @@ public class MultiSelectionSpinner extends Spinner implements
         }
         return selection;
     }
-
     private String buildSelectedItemString() {
         StringBuilder sb = new StringBuilder();
         boolean foundOne = false;
-
         for (int i = 0; i < _items.length; ++i) {
             if (mSelection[i]) {
                 if (foundOne) {
                     sb.append(", ");
                 }
                 foundOne = true;
-
                 sb.append(_items[i]);
             }
         }
         return sb.toString();
     }
-
     public String getSelectedItemsAsString() {
         StringBuilder sb = new StringBuilder();
         boolean foundOne = false;
-
         for (int i = 0; i < _items.length; ++i) {
             if (mSelection[i]) {
                 if (foundOne) {

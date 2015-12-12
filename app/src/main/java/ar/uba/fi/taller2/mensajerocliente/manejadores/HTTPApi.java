@@ -76,6 +76,13 @@ public class HTTPApi extends AsyncTask<String, Void, String> {
         this.execute();
     }
 
+    public void listaUsuarios(){
+        this.manejadorHTTP = new ManejadorHTTP();
+        this.manejadorHTTP.setAPI(APIConstantes.LISTA_USUARIOS);
+
+        this.execute();
+    }
+
     /**
      * Ejecuta el servicio de resumenes de las conversaciones archivadas
      * @param token Token del usuario que quiere el resumen
@@ -147,13 +154,35 @@ public class HTTPApi extends AsyncTask<String, Void, String> {
     }
 
     /**
+     *Ejecuta el servicio de actualizar filtros
+     * @param token Token del usuario que actualiza la ubicacion
+     * @param filtros Filtros a actualizar
+     */
+    public void actualizarFiltros(String token, String filtros){
+        this.manejadorHTTP = new ManejadorHTTP();
+        this.manejadorHTTP.setAPI(APIConstantes.FILTROS_ACTUALIZAR);
+        this.manejadorHTTP.agregarCampo(new ClaveValor(APIConstantes.CAMPO_TOKEN, token));
+        this.manejadorHTTP.agregarCampo(new ClaveValor(APIConstantes.CAMPO_FILTROS, filtros));
+
+        this.execute();
+    }
+
+    public void buscarCoincidencias(String token){
+        this.manejadorHTTP = new ManejadorHTTP();
+        this.manejadorHTTP.setAPI(APIConstantes.BUSCAR_COINCIDENCIAS);
+        this.manejadorHTTP.agregarCampo(new ClaveValor(APIConstantes.CAMPO_TOKEN, token));
+
+        this.execute();
+    }
+    /**
      * Ejecuta el servicio de registracion
      * @param usuario Usuario que quiere registrarse
      * @param password Su contraseña
      */
-    public void registracion(String usuario, String password) {
+    public void registracion(String usuario, String password, int edad) {
         this.manejadorHTTP = new ManejadorHTTP();
         this.manejadorHTTP.setAPI(APIConstantes.REGISTRACION);
+        this.manejadorHTTP.agregarCampo(new ClaveValor(APIConstantes.CAMPO_EDAD, Integer.toString(edad)));
         this.manejadorHTTP.agregarCampo(new ClaveValor(APIConstantes.CAMPO_USUARIO, usuario));
         this.manejadorHTTP.agregarCampo(new ClaveValor(APIConstantes.CAMPO_PASSWORD, password));
 
@@ -222,6 +251,8 @@ public class HTTPApi extends AsyncTask<String, Void, String> {
 
         this.execute();
     }
+
+
 
     /**
      * Ejecuta el servicio de Ver Imagen

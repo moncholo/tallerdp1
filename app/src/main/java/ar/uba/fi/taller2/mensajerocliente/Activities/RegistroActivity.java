@@ -6,9 +6,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ar.uba.fi.taller2.mensajerocliente.R;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.HTTPApi;
@@ -16,16 +22,58 @@ import ar.uba.fi.taller2.mensajerocliente.manejadores.ManejadorRegistracion;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.ReceptorDeResultados;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.RespuestaHTTP;
 import ar.uba.fi.taller2.mensajerocliente.utilidades.ConstructorDeDialogo;
+import ar.uba.fi.taller2.mensajerocliente.utilidades.ManejadorDeToken;
 
 /**
  * Activity de lista de conversaciones archivadas
  */
-public class RegistroActivity extends ActionBarActivity {
+public class RegistroActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
+
+    private int edad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        edad=0;
         setContentView(R.layout.activity_registro);
+        crearSpinnerEdad();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        //getting age you selected
+        int age = Integer.parseInt(parent.getItemAtPosition(position).toString());
+        this.edad = age;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public int getEdad(){
+        return this.edad;
+    }
+
+    private void crearSpinnerEdad(){
+        Spinner s = (Spinner) findViewById(R.id.spinnerEdad);
+
+        //creating a list of data to show
+        List age = new ArrayList<>();
+        for (int i=18; i < 100; i++){
+            age.add(i);
+        }
+        //creating a adapter for spinner
+        ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,age);
+
+        //used to set layout style
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        //connecting adapter to spinner object.
+        s.setAdapter(adapter);
+
+        //setting on item selected listener
+        s.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -92,7 +140,7 @@ public class RegistroActivity extends ActionBarActivity {
             });
 
             dialogo.show();
-            httpApi.registracion(usuario.getText().toString(), password.getText().toString());
+            httpApi.registracion(usuario.getText().toString(), password.getText().toString(), this.edad);
 
         }else{
             enunciarEstado(getResources().getString(R.string.contrasenas_no_concuerdan), Color.RED);

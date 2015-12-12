@@ -138,6 +138,7 @@ public class EditarPerfilActivity extends ActionBarActivity implements GoogleApi
         });
 
         dialogo.show();
+
         httpApi.editarPerfil(ManejadorDeToken.obtenerToken(this), nick.getText().toString(), conexion.getText().toString(), passVieja.getText().toString(), passNueva.getText().toString());
 
         passVieja.setText("");

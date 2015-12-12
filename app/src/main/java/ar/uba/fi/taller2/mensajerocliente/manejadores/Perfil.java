@@ -6,6 +6,8 @@ package ar.uba.fi.taller2.mensajerocliente.manejadores;
 
 public class Perfil {
 
+    private String filtros;
+
     /**
      *
      * @return Nick del usuario
@@ -109,4 +111,7 @@ public class Perfil {
     private double longitud;
     private String ubicacionCercana;
 
+    public void setFiltros(String filtros) {
+        this.filtros = filtros;
+    }
 }

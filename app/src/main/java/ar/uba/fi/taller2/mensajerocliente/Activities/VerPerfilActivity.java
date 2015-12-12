@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -103,7 +104,6 @@ public class VerPerfilActivity extends ActionBarActivity implements OnMapReadyCa
 
         httpApi.verPerfil(ManejadorDeToken.obtenerToken(this), this.usuario);
         ActualizadorDeImagen.actualizar(getApplicationContext(), usuario, (ImageView) findViewById(R.id.imagePerfil));
-
     }
 
     @Override
@@ -144,6 +144,13 @@ public class VerPerfilActivity extends ActionBarActivity implements OnMapReadyCa
 
         googleMap.setMyLocationEnabled(true);
 
+    }
+
+    @Override
+    public void onStop(){
+        finish();
+        System.out.println("Finalizo");
+        super.onStop();
     }
 
     public void moverMapa(double latitud, double longitud) {

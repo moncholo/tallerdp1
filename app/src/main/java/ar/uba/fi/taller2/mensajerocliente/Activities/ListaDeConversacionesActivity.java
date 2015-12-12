@@ -23,6 +23,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -57,9 +64,10 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
     String conversacionParaArchivar;
     ProgressBar progressBar;
     Timer timer;
+    Timer timerCoincidencias;
     EditText textBuscador;
     LinkedHashMap<String, Boolean> estadoLecturaConversaciones;
-    boolean eventoRecibido;
+    boolean eventoRecibido, eventoRecibidoCoincidencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +99,15 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
             }
         });
 
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        if (!ManejadorDeToken.esVersionGratuita(this)){
+            mAdView.setVisibility(View.GONE);
+        }
+
+
     }
 
 
@@ -111,13 +128,80 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
     protected void onResume(){
         super.onResume();
         this.eventoRecibido = true;
+        this.eventoRecibidoCoincidencias = true;
         this.iniciarTimerBackground(4000);
+        this.buscarCoincidenciasEnBackground(10000);
         this.textBuscador.setText("");
+        HTTPApi httpApi = new HTTPApi(new ReceptorDeResultados() {
+            @Override
+            public void recibirResultado(RespuestaHTTP resultado) {
+                try {
+                    JSONObject object = new JSONObject(resultado.getString());
+                    String usuarios = object.getString(APIConstantes.CLAVE_LISTA_USUARIOS);
+                    JSONArray listaUsuarios = new JSONArray(usuarios);
+                    for (int i = 0; i < listaUsuarios.length(); i++){
+                        System.out.println(listaUsuarios.getString(i));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void errorResultado(String error) {
+                System.out.println(error);
+            }
+        });
+
+        httpApi.listaUsuarios();
+    }
+
+    private void buscarCoincidencias(){
+
+        HTTPApi httpApi = new HTTPApi(new ReceptorDeResultados() {
+            @Override
+            public void recibirResultado(RespuestaHTTP resultado) {
+
+                eventoRecibidoCoincidencias = true;
+                System.out.println(resultado.getString());
+            }
+
+            @Override
+            public void errorResultado(String error) {
+                System.out.println(error);
+
+            }
+        });
+
+        httpApi.buscarCoincidencias(ManejadorDeToken.obtenerToken(this));
+
+    }
+
+    private void buscarCoincidenciasEnBackground(int tiempoEnMS) {
+        if (this.timerCoincidencias != null){
+            this.timerCoincidencias.cancel();
+        }
+
+        this.timerCoincidencias = new Timer();
+
+        this.timerCoincidencias.scheduleAtFixedRate(
+                new TimerTask() {
+                    public void run() {
+                        if (eventoRecibidoCoincidencias) {
+                            eventoRecibidoCoincidencias= false;
+                            buscarCoincidencias();
+                        }
+
+                    }
+                },
+                0,      // run first occurrence immediately
+                tiempoEnMS);  // run every three seconds
     }
 
     @Override
     protected void onPause(){
         super.onPause();
+        this.timerCoincidencias.cancel();
         this.timer.cancel();
     }
 
@@ -125,6 +209,7 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
     protected void onStart(){
         super.onStart();
         this.eventoRecibido = true;
+        this.eventoRecibidoCoincidencias = true;
         Intent intent = getIntent();
         this.usuario = intent.getStringExtra(APIConstantes.CAMPO_USUARIO);
 
@@ -213,7 +298,7 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
             public void errorResultado(String error) {
                 progressBar.setVisibility(View.GONE);
             }
-         });
+        });
 
         httpApi.resumenesConversacion(ManejadorDeToken.obtenerToken(this));
     }
@@ -329,26 +414,21 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
 
     public void cerrarSesion(){
 
-        final ProgressDialog dialogo = ConstructorDeDialogo.obtener(this);
 
+        final ProgressDialog dialogo = ConstructorDeDialogo.obtener(this);
         HTTPApi httpApi = new HTTPApi(new ReceptorDeResultados(){
             @Override
             public void recibirResultado(RespuestaHTTP resultado) {
                 dialogo.dismiss();
                 ManejadorCerrarSesion manejador = new ManejadorCerrarSesion(resultado.getString());
-
                 if (manejador.estadoValido()) {
                     ManejadorDeToken.borrarToken(getApplicationContext());
-
-
                     Intent serv = new Intent(getApplicationContext(), ServicioDeNotificaciones.class);
                     stopService(serv);
-
                     Intent intent = new Intent(getApplicationContext(), IniciarSesionActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
-
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.error_conexion, Toast.LENGTH_SHORT).show();
                 }
@@ -359,7 +439,6 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
                 Toast.makeText(getApplicationContext(), R.string.error_conexion, Toast.LENGTH_SHORT).show();
             }
         });
-
         dialogo.show();
         httpApi.cerrarSesion(ManejadorDeToken.obtenerToken(this));
     }
@@ -368,6 +447,7 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
     @Override
     public void finish(){
         this.timer.cancel();
+        this.timerCoincidencias.cancel();
         Log.i("Se cierra sesion", "ok");
         super.finish();
     }
@@ -413,16 +493,16 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
         } else if (id == R.id.action_cerrar_sesion) {
             cerrarSesion();
             return true;
-        } else if (id == R.id.action_nueva_conversacion) {
-            Intent intent = new Intent(this, IniciarNuevaConversacionActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(intent);
-            return true;
-        } else  if (id == R.id.action_ver_archivadas) {
+
+        } else if (id == R.id.action_ver_archivadas) {
             abrirConversacionesArchivadas();
             return true;
         } else if (id == R.id.action_mensaje_broadcast){
             enviarMensajeBroadcast();
+        } else if (id == R.id.action_registrar_viaje){
+            Intent intent = new Intent(this, RegistrarViajeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
