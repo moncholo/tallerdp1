@@ -44,6 +44,7 @@ import ar.uba.fi.taller2.mensajerocliente.manejadores.ManejadorArchivarConversac
 import ar.uba.fi.taller2.mensajerocliente.manejadores.ManejadorCerrarSesion;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.ManejadorListaConversaciones;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.ManejadorNoLeidos;
+import ar.uba.fi.taller2.mensajerocliente.manejadores.ManejadorViajes;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.ReceptorDeResultados;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.RespuestaHTTP;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.ResumenConversacion;
@@ -188,7 +189,7 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
                 new TimerTask() {
                     public void run() {
                         if (eventoRecibidoCoincidencias) {
-                            eventoRecibidoCoincidencias= false;
+                            eventoRecibidoCoincidencias = false;
                             buscarCoincidencias();
                         }
 
@@ -212,6 +213,14 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
         this.eventoRecibidoCoincidencias = true;
         Intent intent = getIntent();
         this.usuario = intent.getStringExtra(APIConstantes.CAMPO_USUARIO);
+        if (ManejadorViajes.obtenerViajes(this)==null){
+            intent = new Intent(this, RegistrarViajeActivity.class);
+            intent.putExtra(APIConstantes.CAMPO_USUARIO, usuario);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
+        }
 
         this.progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -361,7 +370,7 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
         fecha.setText(resumenConversacion.getMensajeDelEmisor().getFecha());
         ultimoMensaje.setText(resumenConversacion.getMensajeDelEmisor().getMensaje());
         l.removeView(vista);
-        l.addView(vista,0);
+        l.addView(vista, 0);
 
     }
 
@@ -503,6 +512,8 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
             Intent intent = new Intent(this, RegistrarViajeActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
+        } else if (id == R.id.action_ver_viajes){
+            abrirMisViajes();
         }
 
         return super.onOptionsItemSelected(item);
@@ -547,6 +558,11 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+
+    public void abrirMisViajes(){
+        Intent intent = new Intent(this, ViajesRegistradosActivity.class);
+        startActivity(intent);
+    }
     public void enviarMensajeBroadcast(){
         Intent intent = new Intent(this, BroadcastActivity.class);
         startActivity(intent);

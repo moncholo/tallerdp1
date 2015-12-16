@@ -11,6 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CalendarView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import ar.uba.fi.taller2.mensajerocliente.R;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.APIConstantes;
 
@@ -93,8 +98,8 @@ public class RegistrarViajeActivity extends ActionBarActivity {
                 intent.putExtra(CITY, "Not Found");
                 break;
         }
-        System.out.println(calendarioIda.getDate());
-        System.out.println(calendarioVuelta.getDate());
+
+
 
         intent.putExtra(APIConstantes.FECHA_IDA, Long.toString(calendarioIda.getDate()));
         intent.putExtra(APIConstantes.FECHA_VUELTA, Long.toString(calendarioVuelta.getDate()));

@@ -164,4 +164,31 @@ public class ManejadorViajes {
     }
 
 
+    public static void eliminarViaje(Context context, String destino, String desde, String hasta) {
+        String viajesString = obtenerViajes(context);
+
+        JSONArray viajes = null;
+        JSONArray viajesNuevos = new JSONArray();
+        JSONObject viaje = null;
+        try {
+            viajes = new JSONArray(viajesString);
+            for (int i=0; i < viajes.length(); i++){
+                viaje = viajes.getJSONObject(i);
+
+                if ((viaje.getString("Destino").compareTo(destino)!=0)||(viaje.getString("Desde").compareTo(desde)!=0)||
+                        (viaje.getString("Hasta").compareTo(hasta)!=0)){
+                    viajesNuevos.put(viaje);
+                }
+
+            }
+            SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString(claveViajes(context), viajesNuevos.toString());
+            editor.commit();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

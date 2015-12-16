@@ -45,6 +45,10 @@
             android:label="@string/title_activity_ver_perfil" >
         </activity>
         <activity
+            android:name=".Activities.ViajesRegistradosActivity"
+            android:label="@string/title_activity_ver_viajes" >
+        </activity>
+        <activity
             android:name=".Activities.EditarPerfilActivity"
             android:label="@string/title_activity_editar_perfil" >
         </activity>

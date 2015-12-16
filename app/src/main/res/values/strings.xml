@@ -25,6 +25,7 @@
     <string name="linkTelo">Desea visitar un albergue transitorio? Ingrese aqui \n<a href="alberguestransitorios.com/">http://www.alberguestransitorios.com/</a></string>
     <string name="banner_ad_unit_id">ca-app-pub-2640433792046506/4771545272</string>
     <string name="title_activity_editar_perfil">Editar Perfil</string>
+    <string name="title_activity_ver_viajes">Mis Viajes</string>
     <string name="nick">Nick</string>
     <string name="conexion">Conexion</string>
     <string name="password">Contraseña</string>
@@ -38,6 +39,7 @@
     <string name="cargando">Cargando...</string>
     <string name="enviando">Enviando...</string>
     <string name="cerrar_sesion">Cerrar Sesión</string>
+    <string name="ver_viajes">Mis Viajes</string>
     <string name="password_vieja">Contraseña vieja</string>
     <string name="password_nueva">Contraseña nueva</string>
     <string name="perfil_actualizado">Perfil actualizado correctamente</string>
@@ -45,6 +47,7 @@
     <string name="btn_buscar">Buscar</string>
     <string name="actualizar_ubicacion">Actualizar Ubicación</string>
     <string name="archivar_conversacion">Archivar</string>
+    <string name="eliminar_viaje">Eliminar</string>
     <string name="desarchivar_conversacion">Desarchivar</string>
     <string name="conversacion_archivada">Conversación archivada</string>
     <string name="conversacion_desarchivada">Conversación desarchivada</string>

@@ -10,6 +10,8 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_cerrar_sesion" android:title="@string/cerrar_sesion"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_ver_viajes" android:title="@string/ver_viajes"
+        android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_mensaje_broadcast" android:title="@string/mensaje_broadcast"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
