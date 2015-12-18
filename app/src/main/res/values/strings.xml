@@ -42,6 +42,7 @@
     <string name="ver_viajes">Mis Viajes</string>
     <string name="password_vieja">Contraseña vieja</string>
     <string name="password_nueva">Contraseña nueva</string>
+    <string name="limite_viajes">Versión gratuita permite un solo destino</string>
     <string name="perfil_actualizado">Perfil actualizado correctamente</string>
     <string name="elegir_imagen">Elegir imagen</string>
     <string name="btn_buscar">Buscar</string>

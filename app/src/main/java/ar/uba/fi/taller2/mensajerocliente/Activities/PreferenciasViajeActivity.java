@@ -46,9 +46,16 @@ public class PreferenciasViajeActivity extends AppCompatActivity implements Adap
         this.desde = intent.getStringExtra(APIConstantes.FECHA_IDA);
         this.hasta = intent.getStringExtra(APIConstantes.FECHA_VUELTA);
         this.edadDesde = 18;
-        this.edadHasta = 18;
+        this.edadHasta = 100;
         this.determinarCiudad(city);
         this.crearSpinner();
+
+        if (ManejadorDeToken.esVersionGratuita(this)){
+            findViewById(R.id.textDesde).setVisibility(View.GONE);
+            findViewById(R.id.textHasta).setVisibility(View.GONE);
+            findViewById(R.id.spinnerDesde).setVisibility(View.GONE);
+            findViewById(R.id.spinnerHasta).setVisibility(View.GONE);
+        }
     }
 
     @Override

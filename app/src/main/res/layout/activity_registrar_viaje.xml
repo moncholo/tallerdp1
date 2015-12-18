@@ -5,7 +5,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/estatua"
+    android:background="@drawable/pariscity"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="ar.uba.fi.taller2.mensajerocliente.Activities.RegistrarViajeActivity">
     <AutoCompleteTextView
@@ -31,8 +31,8 @@
             android:onClick="seleccionarFechaIda"
             android:layout_weight="1.0"
             android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:background="#FF17009A"/>
+            android:textColor="#525151"
+            android:background="#F5EAEA"/>
         <Button
             android:layout_width="0.0dip" android:layout_height="fill_parent"
             android:text="Vuelta"
@@ -40,9 +40,9 @@
             android:onClick="seleccionarFechaVuelta"
             android:layout_weight="1.0"
             android:textStyle="bold"
-            android:background="#FF17009A"
             android:layout_marginLeft="20dp"
-            android:textColor="#ffffff" />
+            android:textColor="#525151"
+            android:background="#F5EAEA" />
     </LinearLayout>
     <CalendarView
         android:id="@+id/calendario_ida"
@@ -76,6 +76,6 @@
         android:onClick="finalizar"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="#FF17009A"
-        android:textColor="#ffffff" />
+        android:textColor="#525151"
+        android:background="#F5EAEA" />
 </RelativeLayout>

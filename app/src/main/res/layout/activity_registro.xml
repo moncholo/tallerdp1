@@ -88,8 +88,8 @@ tools:context="ar.uba.fi.taller2.mensajerocliente.Activities.RegistroActivity">
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="false"
             android:nestedScrollingEnabled="false"
-            android:textColor="#ffffff"
-            android:background="#FF17009A"
+            android:textColor="#525151"
+            android:background="#F5EAEA"
             android:onClick="registracion" />
     </RelativeLayout>
 

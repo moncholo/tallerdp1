@@ -4,7 +4,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="2dp"
-    android:background="#FFFFFF"
+    android:background="#F5EAEA"
 
     android:id="@+id/relativeResumenViaje">
 
@@ -15,7 +15,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Destino"
         android:textStyle="bold"
-        android:textColor="#FF17009A"
+        android:textColor="#525151"
         android:id="@+id/textDestinoViaje"
         android:paddingLeft="7dp" />
 
@@ -25,7 +25,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Fecha Desde a Fecha Hasta"
         android:id="@+id/textFechasViaje"
-        android:textColor="#FF17009A"
+        android:textColor="#525151"
         android:singleLine="true"
         android:layout_below="@+id/textDestinoViaje"
         android:paddingLeft="7dp" />

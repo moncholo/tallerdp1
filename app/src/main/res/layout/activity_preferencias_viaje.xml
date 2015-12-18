@@ -95,8 +95,8 @@
     <Button
         android:id="@+id/finalizar2"
         android:layout_width="fill_parent"
-        android:textColor="#ffffff"
-        android:background="#FF17009A"
+        android:textColor="#525151"
+        android:background="#F5EAEA"
         android:layout_height="wrap_content"
         android:text="Guardar Selección"
         android:textStyle="bold"

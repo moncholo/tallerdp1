@@ -54,22 +54,17 @@ public class ManejadorDeToken {
         editor.commit();
     }
 
+    public static void setVersionGratuita(Context context, boolean esGratuita){
+        SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean(APIConstantes.PERSISTENCIA_GRATUITA, esGratuita);
+        editor.commit();
+
+    }
     public static boolean esVersionGratuita(Context context){
         SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
         boolean resultado = settings.getBoolean(APIConstantes.PERSISTENCIA_GRATUITA, true);
-
-        if (resultado){
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean(APIConstantes.PERSISTENCIA_GRATUITA, false);
-            editor.commit();
-            return true;
-        }else{
-            SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean(APIConstantes.PERSISTENCIA_GRATUITA, true);
-            editor.commit();
-            return false;
-
-        }
+        return resultado;
     }
 
     /**
@@ -101,5 +96,6 @@ public class ManejadorDeToken {
     public static void borrarToken(Context context) {
         SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
         settings.edit().remove(APIConstantes.PERSISTENCIA_TOKEN).commit();
+        setVersionGratuita(context, !esVersionGratuita(context));
     }
 }

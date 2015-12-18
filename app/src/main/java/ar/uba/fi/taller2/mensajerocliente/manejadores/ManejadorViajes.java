@@ -170,6 +170,7 @@ public class ManejadorViajes {
         JSONArray viajes = null;
         JSONArray viajesNuevos = new JSONArray();
         JSONObject viaje = null;
+        boolean hayViajeNuevo = false;
         try {
             viajes = new JSONArray(viajesString);
             for (int i=0; i < viajes.length(); i++){
@@ -178,12 +179,13 @@ public class ManejadorViajes {
                 if ((viaje.getString("Destino").compareTo(destino)!=0)||(viaje.getString("Desde").compareTo(desde)!=0)||
                         (viaje.getString("Hasta").compareTo(hasta)!=0)){
                     viajesNuevos.put(viaje);
+                    hayViajeNuevo = true;
                 }
 
             }
             SharedPreferences settings = context.getSharedPreferences(APIConstantes.PERSISTENCIA_DATOS, 0);
             SharedPreferences.Editor editor = settings.edit();
-            editor.putString(claveViajes(context), viajesNuevos.toString());
+            editor.putString(claveViajes(context),viajesNuevos.toString());
             editor.commit();
 
         } catch (JSONException e) {

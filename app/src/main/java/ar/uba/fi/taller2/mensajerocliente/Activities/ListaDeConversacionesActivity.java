@@ -431,6 +431,7 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
                 dialogo.dismiss();
                 ManejadorCerrarSesion manejador = new ManejadorCerrarSesion(resultado.getString());
                 if (manejador.estadoValido()) {
+
                     ManejadorDeToken.borrarToken(getApplicationContext());
                     Intent serv = new Intent(getApplicationContext(), ServicioDeNotificaciones.class);
                     stopService(serv);
@@ -449,6 +450,8 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
             }
         });
         dialogo.show();
+        this.timerCoincidencias.cancel();
+        this.timer.cancel();
         httpApi.cerrarSesion(ManejadorDeToken.obtenerToken(this));
     }
 
@@ -509,14 +512,23 @@ public class ListaDeConversacionesActivity extends ActionBarActivity {
         } else if (id == R.id.action_mensaje_broadcast){
             enviarMensajeBroadcast();
         } else if (id == R.id.action_registrar_viaje){
-            Intent intent = new Intent(this, RegistrarViajeActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(intent);
+            abrirRegistroDeViajes();
+
         } else if (id == R.id.action_ver_viajes){
             abrirMisViajes();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void abrirRegistroDeViajes(){
+        if (ManejadorDeToken.esVersionGratuita(this)&&ManejadorViajes.obtenerViajes(this)!=null){
+            Toast.makeText(getApplicationContext(), R.string.limite_viajes, Toast.LENGTH_SHORT).show();
+        }else{
+            Intent intent = new Intent(this, RegistrarViajeActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
+        }
     }
 
     public void abrirConversacion(View v) {

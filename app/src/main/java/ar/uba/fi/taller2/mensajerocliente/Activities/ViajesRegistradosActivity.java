@@ -26,6 +26,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import ar.uba.fi.taller2.mensajerocliente.R;
+import ar.uba.fi.taller2.mensajerocliente.manejadores.APIConstantes;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.HTTPApi;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.ManejadorActualizarUbicacion;
 import ar.uba.fi.taller2.mensajerocliente.manejadores.ManejadorViajes;
@@ -93,6 +94,7 @@ public class ViajesRegistradosActivity extends ActionBarActivity{
             this.l.removeView(this.viewAEliminar);
             actualizarFiltros(ManejadorViajes.obtenerViajes(this));
 
+
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -137,6 +139,8 @@ public class ViajesRegistradosActivity extends ActionBarActivity{
             LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             for (int i=0; i < viajes.length(); i++){
                 View v = inflater.inflate(R.layout.resumen_viaje, l, false);
+                v.setBackgroundColor(APIConstantes.COLOR_VIAJE_REGISTRADO);
+
                 TextView destino = (TextView) v.findViewById(R.id.textDestinoViaje);
                 TextView fechaViaje = (TextView) v.findViewById(R.id.textFechasViaje);
                 viaje = viajes.getJSONObject(i);

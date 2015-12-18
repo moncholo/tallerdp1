@@ -91,6 +91,7 @@ public class APIConstantes {
     public static final String CAMPO_FILTROS = "filtros";
 
     //Colores
-    public static final int COLOR_NUEVO_MENSAJE = 0xFFA1A1A1;
-    public static final int COLOR_MENSAJE_LEIDO = 0xFFFFFFFF;
+    public static final int COLOR_NUEVO_MENSAJE = 0x80F5EAEA;
+    public static final int COLOR_VIAJE_REGISTRADO = 0x80F5EAEA;
+    public static final int COLOR_MENSAJE_LEIDO = 0x80FFFFFF;
 }

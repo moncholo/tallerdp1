@@ -4,7 +4,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="2dp"
-        android:background="#FFFFFF"
+        android:background="#80FFFFFF"
         android:onClick="abrirConversacion"
 
     android:id="@+id/relativeResumen">
